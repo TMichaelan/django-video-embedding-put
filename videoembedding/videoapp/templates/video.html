@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load embed_video_tags %}
+
+{% block content %}
+
+<div class="container py-5">
+  <h1>{{ video.title }}</h1>
+
+  {% video video.video as this_video %} {%video this_video %}
+
+  <p>{{ video.description }}</p>
+  {% endvideo %}
+  <a href="/" class="btn btn-primary mt-auto">Back to list</a>
+</div>
+{% endblock %}
