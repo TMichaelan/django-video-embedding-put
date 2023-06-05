@@ -18,6 +18,19 @@ class VideoView(generic.DetailView):
         return context
 
 
-def index(request):
-    videos = EmbeddedVideoItem.objects.all()
-    return render(request, 'index.html', context={'videos': videos})
+# def index(request):
+#     videos = EmbeddedVideoItem.objects.all()
+#     return render(request, 'index.html', context={'videos': videos})
+
+class IndexView(generic.ListView):
+    paginate_by = 10
+
+    template_name = 'index.html'
+    context_object_name = 'videos'
+
+    def get_queryset(self):
+        return EmbeddedVideoItem.objects.order_by('-title')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context

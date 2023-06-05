@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row row-cols-1 row-cols-md-2 g-4" style="margin-top:20px">
-   {% for item in videos %}
+   {% for item in page_obj %}
       {% video item.video as this_video %}
        <div class="card" style="width: 18rem; margin-right:10px">
         <img src="{{ this_video.thumbnail }}" class="card-img-top" alt="{{ this_video.thumbnail }}" style="margin-top:10px"
@@ -17,4 +17,16 @@
       {% endvideo %}
     {% endfor %}
 </div>
+<div>
+  {% if page_obj.has_previous %}
+  <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+  
+  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+  
+  {% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}">Next</a>
+  {% endif %}
+</div>
+
 {% endblock content %}
